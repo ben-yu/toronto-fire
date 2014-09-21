@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<h1>Average Number of Trucks</h1>
+<div class="rating-chart"></div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+<script type="text/javascript">
+{% autoescape off %}
+   // Plot Rating Chart
+    var avg_num_of_trucks = JSON.parse('{{ avg_num_of_trucks }}');
+{% endautoescape %}  
+</script>

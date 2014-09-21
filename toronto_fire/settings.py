@@ -29,6 +29,10 @@ else:
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = (
+    './toronto_fire/templates',
+)
+
 
 # Application definition
 
