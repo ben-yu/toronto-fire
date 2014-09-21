@@ -23,8 +23,8 @@ class Command(BaseCommand):
                         # We'll count the units listed
                         incident.number_of_units = len(filter(None, incident_row[10].split(','))) if ',' in incident_row[10] else 0
 
-                        incident.start_datetime = datetime.strptime(incident_row[5],'%Y-%m-%d   %I:%M:%S %p')
-                        incident.arrival_datetime = datetime.strptime(incident_row[11],'%Y-%m-%d   %I:%M:%S %p')
-                        incident.end_datetime = datetime.strptime(incident_row[12],'%Y-%m-%d   %I:%M:%S %p')
+                        incident.start_datetime = datetime.strptime(incident_row[5],'%Y-%m-%d %H:%M:%S')
+                        incident.arrival_datetime = datetime.strptime(incident_row[11],'%Y-%m-%d %H:%M:%S')
+                        incident.end_datetime = datetime.strptime(incident_row[12],'%Y-%m-%d %H:%M:%S')
 
                         incident.save()
