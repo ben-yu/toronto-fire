@@ -20,11 +20,13 @@ class ImportIncidentTestCase(TestCase):
     def setUp(self):
         # Create a csv file with a single row
         import csv
+        header_row = ['PrimeStreet','CrossStreet','LookupIntersection','Latitude','Longitude','DispatchTime','IncidentNo','IncidentType','AlarmLevel','Area','DispatchedUnits','IncidentLoadTime','MAX(FireDispatchUpdate)']
         test_row = ['MOUNT PLEASANT RD and LAWRENCE AVE E Toronto ','43.7261546','-79.3971892','2011-01-01  12:07:23 AM',\
         'F11000011','Carbon Monoxide - Non Medical','1','131','A131','2011-01-01  12:07:23 AM','2011-01-01  12:07:23 AM']
 
         test_csv = open('unittest.csv', 'wb')
         wr = csv.writer(test_csv, quoting=csv.QUOTE_ALL)
+        wr.writerow(header_row)
         wr.writerow(test_row)
 
     def tearDown(self):
