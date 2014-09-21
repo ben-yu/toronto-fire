@@ -22,7 +22,7 @@ class ImportIncidentTestCase(TestCase):
         import csv
         header_row = ['PrimeStreet','CrossStreet','LookupIntersection','Latitude','Longitude','DispatchTime','IncidentNo','IncidentType','AlarmLevel','Area','DispatchedUnits','IncidentLoadTime','MAX(FireDispatchUpdate)']
         test_row = ['MOUNT PLEASANT RD', 'TT   LAWRENCE AVE E / WANLESS AVE','MOUNT PLEASANT RD and LAWRENCE AVE E Toronto','43.7261546','-79.3971892','2011-01-01  00:07:23',\
-        'F11000011','Carbon Monoxide - Non Medical','1','131','A131,','2011-01-01  00:07:23','2011-01-01  00:07:23']
+        'F11000011','Carbon Monoxide - Non Medical','1','131','A131,','2011-01-01  00:07:23','2011-01-01  00:07:33']
 
         test_csv = open('unittest.csv', 'wb')
         wr = csv.writer(test_csv, quoting=csv.QUOTE_ALL)
@@ -45,3 +45,4 @@ class ImportIncidentTestCase(TestCase):
         self.assertEqual(incident.incident_number,"F11000011")
         self.assertEqual(incident.alarm_level,1)
         self.assertEqual(incident.number_of_units,1)
+        self.assertEqual(incident.get_duration(),10)
