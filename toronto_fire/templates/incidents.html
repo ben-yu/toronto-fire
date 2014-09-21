@@ -2,6 +2,15 @@
 <meta charset="utf-8">
 <style>
 
+#num-trucks-chart div {
+  font: 10px sans-serif;
+  background-color: green;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
 #tooltip {
     position: absolute;
     width: 95px;
@@ -109,13 +118,15 @@ var svg = d3.select("#num-trucks-chart")
 svg.selectAll("rect")
     .data(number_of_units)
   .enter().append("rect")
-    .attr("x", function(d, i) { return xScale(i) - .5; })
+    .attr("x", function(d, i) { return xScale(i)})
     .attr("y", function(d) { 
-        return h - yScale(d) - .5; 
+        return yScale(d); 
     })
     .attr("width", w/incident_type.length)
-    .attr("height", function(d) { return yScale(d); } )
+    .attr("height", function(d) { return h - yScale(d); } )
     .attr("fill","green")
+    .attr("stroke","rgb(0,0,0)")
+    .attr("stroke-width","1")
     .text(function(d) { return d; });
 
     // xAxis
