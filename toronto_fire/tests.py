@@ -21,8 +21,8 @@ class ImportIncidentTestCase(TestCase):
         # Create a csv file with a single row
         import csv
         header_row = ['PrimeStreet','CrossStreet','LookupIntersection','Latitude','Longitude','DispatchTime','IncidentNo','IncidentType','AlarmLevel','Area','DispatchedUnits','IncidentLoadTime','MAX(FireDispatchUpdate)']
-        test_row = ['MOUNT PLEASANT RD and LAWRENCE AVE E Toronto ','43.7261546','-79.3971892','2011-01-01  12:07:23 AM',\
-        'F11000011','Carbon Monoxide - Non Medical','1','131','A131','2011-01-01  12:07:23 AM','2011-01-01  12:07:23 AM']
+        test_row = ['MOUNT PLEASANT RD', 'TT   LAWRENCE AVE E / WANLESS AVE','MOUNT PLEASANT RD and LAWRENCE AVE E Toronto','43.7261546','-79.3971892','2011-01-01  12:07:23 AM',\
+        'F11000011','Carbon Monoxide - Non Medical','1','131','A131,','2011-01-01  12:07:23 AM','2011-01-01  12:07:23 AM']
 
         test_csv = open('unittest.csv', 'wb')
         wr = csv.writer(test_csv, quoting=csv.QUOTE_ALL)
@@ -43,3 +43,5 @@ class ImportIncidentTestCase(TestCase):
         incident = Incident.objects.get(incident_number="F11000011")
 
         self.assertEqual(incident.incident_number,"F11000011")
+        self.assertEqual(incident.alarm_level,1)
+        self.assertEqual(incident.number_of_units,1)
