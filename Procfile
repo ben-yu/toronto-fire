@@ -1,0 +1,1 @@
+web: gunicorn toronto_fire.wsgi --log-file -
