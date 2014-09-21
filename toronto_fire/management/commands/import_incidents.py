@@ -26,5 +26,6 @@ class Command(BaseCommand):
                         incident.start_datetime = datetime.strptime(incident_row[5],'%Y-%m-%d %H:%M:%S')
                         incident.arrival_datetime = datetime.strptime(incident_row[11],'%Y-%m-%d %H:%M:%S')
                         incident.end_datetime = datetime.strptime(incident_row[12],'%Y-%m-%d %H:%M:%S')
+                        incident.duration_in_min = (incident.end_datetime - incident.start_datetime).total_seconds() // 60
 
                         incident.save()

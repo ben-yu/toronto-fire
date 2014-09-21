@@ -16,7 +16,9 @@ class Incident(models.Model):
     end_datetime = models.DateTimeField(default=timezone.now)
     alarm_level = models.IntegerField(default=0)
     number_of_units = models.IntegerField(default=0)
+    duration_in_min = models.IntegerField(default=0)
 
+    @property
     def get_duration(self):
         """ 
         Returns the duration of the incident in seconds, which is
