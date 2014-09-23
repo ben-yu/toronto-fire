@@ -277,6 +277,15 @@ svg.selectAll("rect")
         svg.selectAll("g.y.axis").call(yAxis);
         svg.selectAll("g.x.axis").call(xAxis);
 
+        var tip = d3.tip()
+          .attr('class', 'd3-tip')
+          .offset([-10, 0])
+          .html(function(d) {
+            return "<strong># of Trucks:</strong> <span style='color:red'>" + d.number_of_units + "</span></br><strong>Duration:</strong> <span style='color:red'>" + d.avg_duration + "</span>";
+          });
+        
+        svg.call(tip);
+
         // now, we can get down to the data part, and drawing stuff. We are telling D3 that all nodes (g elements with class node) will have data attached to them. The 'key' we use (to let D3 know the uniqueness of items) will be the name. Not usually a great key, but fine for this example.
         var nodes = svg.selectAll("g.node").data(avg_trucks_and_duration, function (d) {
             return d.alarm_level;
@@ -294,6 +303,8 @@ svg.selectAll("rect")
         nodeGroup.append("circle")
             .attr("r", 5)
             .attr("class", "dot")
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)              
             .style("fill", function (d) {
                 // remember the ordinal scales? We use the colors scale to get a colour for our manufacturer. Now each node will be coloured
                 // by who makes the chocolate. 
