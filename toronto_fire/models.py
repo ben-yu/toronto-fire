@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from toronto_fire.managers import IncidentManager
+
 class Incident(models.Model):
     """
     Any incident in the toronto-fire dataset are represented
@@ -17,4 +19,6 @@ class Incident(models.Model):
     alarm_level = models.IntegerField(default=0)
     number_of_units = models.IntegerField(default=0)
     duration_in_min = models.IntegerField(default=0)
+
+    objects = IncidentManager() 
     

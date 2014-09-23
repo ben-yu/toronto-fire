@@ -8,13 +8,26 @@ import os
 class IncidentTestCase(TestCase):
     def setUp(self):
         Incident.objects.create(incident_number='F10150021',start_datetime=datetime.strptime('2011-01-01  12:02:50 AM','%Y-%m-%d   %I:%M:%S %p'), \
-            arrival_datetime=datetime.strptime('2011-01-01  12:12:06 AM','%Y-%m-%d   %I:%M:%S %p'), end_datetime=datetime.strptime('2011-01-01  12:35:00 AM','%Y-%m-%d   %I:%M:%S %p'))
+            arrival_datetime=datetime.strptime('2011-01-01  12:12:06 AM','%Y-%m-%d   %I:%M:%S %p'), \
+            end_datetime=datetime.strptime('2011-01-01  12:35:00 AM','%Y-%m-%d   %I:%M:%S %p'), \
+            number_of_units=1, incident_type='Type 1')
+        Incident.objects.create(incident_number='F10150022',start_datetime=datetime.strptime('2011-01-01  12:02:50 AM','%Y-%m-%d   %I:%M:%S %p'), \
+            arrival_datetime=datetime.strptime('2011-01-01  12:12:06 AM','%Y-%m-%d   %I:%M:%S %p'), \
+            end_datetime=datetime.strptime('2011-01-01  12:35:00 AM','%Y-%m-%d   %I:%M:%S %p'), \
+            number_of_units=3, incident_type='Type 1')
+
 
     def test_incident_creation(self):
         """ Incidents are being properly created """
         incident = Incident.objects.get(incident_number="F10150021")
 
         self.assertEqual(incident.incident_number,"F10150021")
+    
+    def test_avg_units_by_type(self):
+        """ Test avg_units_by_type() in IncidentQuerySet"""
+        avg_num_of_trucks =  Incident.objects.avg_units_by_type()
+
+        self.assertEqual(list(avg_num_of_trucks)[0]['number_of_units'],2.0)
 
 class ImportIncidentTestCase(TestCase):
     def setUp(self):
