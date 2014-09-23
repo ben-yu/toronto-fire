@@ -17,15 +17,4 @@ class Incident(models.Model):
     alarm_level = models.IntegerField(default=0)
     number_of_units = models.IntegerField(default=0)
     duration_in_min = models.IntegerField(default=0)
-
-    @property
-    def get_duration(self):
-        """ 
-        Returns the duration of the incident in seconds, which is
-        the difference between end_datetime and start_datetime
-        """
-        if self.start_datetime and self.end_datetime:
-            time_diff = self.end_datetime - self.start_datetime
-            return time_diff.total_seconds()
-
     
