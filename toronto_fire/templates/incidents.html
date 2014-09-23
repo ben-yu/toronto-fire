@@ -64,6 +64,35 @@ rect:hover{
     font-size: 11px;
 }
 
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
 </style>
 <h1>Figure 1 - Average Number of Trucks by Incident Type (2011-2012)</h1>
 <div id="num-trucks-chart"></div>
@@ -74,6 +103,7 @@ trucks on average. This could be due to fact that most of these incidents are in
 <p><b>Figure 2</b> - The average number of trucks and duration of an incident, categorized by the alarm level of the incident. Duration of the incident scales exponentially, with Level 4 
 incidents topping out at 3324.0 minutes (approx. 2 days), to Level 0 incidents taking only 20 minutes on average</p>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script type="text/javascript">
 {% autoescape off %}
    // Plot Incident Type vs. Avg Number of Trucks in a Bar Graph
@@ -110,6 +140,13 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(5);
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong># of Trucks:</strong> <span style='color:red'>" + d + "</span>";
+  });    
+
 var commaFormat = d3.format(',');
 
 //SVG element
@@ -119,7 +156,7 @@ var svg = d3.select("#num-trucks-chart")
     .attr("height", h + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+svg.call(tip);
 // Graph Bars
 svg.selectAll("rect")
     .data(number_of_units)
@@ -133,6 +170,8 @@ svg.selectAll("rect")
     .attr("fill","green")
     .attr("stroke","rgb(0,0,0)")
     .attr("stroke-width","1")
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide)    
     .text(function(d) { return d; });
 
     // xAxis
