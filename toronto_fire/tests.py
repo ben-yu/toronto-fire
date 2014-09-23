@@ -10,11 +10,11 @@ class IncidentTestCase(TestCase):
         Incident.objects.create(incident_number='F10150021',start_datetime=datetime.strptime('2011-01-01  12:02:50 AM','%Y-%m-%d   %I:%M:%S %p'), \
             arrival_datetime=datetime.strptime('2011-01-01  12:12:06 AM','%Y-%m-%d   %I:%M:%S %p'), \
             end_datetime=datetime.strptime('2011-01-01  12:12:00 AM','%Y-%m-%d   %I:%M:%S %p'), \
-            number_of_units=1, incident_type='Type 1', duration_in_min=10.0 )
+            number_of_units=1, incident_type='Type 1 - thing', duration_in_min=10.0 )
         Incident.objects.create(incident_number='F10150022',start_datetime=datetime.strptime('2011-01-01  12:02:50 AM','%Y-%m-%d   %I:%M:%S %p'), \
             arrival_datetime=datetime.strptime('2011-01-01  12:12:06 AM','%Y-%m-%d   %I:%M:%S %p'), \
             end_datetime=datetime.strptime('2011-01-01  12:35:00 AM','%Y-%m-%d   %I:%M:%S %p'), \
-            number_of_units=3, incident_type='Type 1',duration_in_min=33.0)
+            number_of_units=3, incident_type='Type 1 - stuff',duration_in_min=33.0)
 
 
     def test_incident_creation(self):
