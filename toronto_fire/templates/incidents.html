@@ -65,10 +65,14 @@ rect:hover{
 }
 
 </style>
-<h1>Average Number of Trucks</h1>
+<h1>Figure 1 - Average Number of Trucks by Incident (2011-2012)</h1>
 <div id="num-trucks-chart"></div>
-<h1>Average Number of Trucks and Incident Duration</h1>
+<p>Figure 1 - The average number of trucks that respond to a incident, categorized by the type of incident. Large scale incidents like 'Structure Collapse' or 'Subway Fire' tend to require more trucks, while smaller single incidents like 'Elevator Rescue' or 'Natural Gas Leak' require significantly less. It's a bit surprising that most events require more than 2 
+trucks on average. This could be due to fact that most of these incidents are infrequent, and are extremely severe, hence requiring more trucks in response.</p>
+<h1>Figure 2 - Average Number of Trucks and Incident Duration (2011-2012)</h1>
 <div id="trucks-duration-chart"></div>
+<p>Figure 2 - The average number of trucks and duration of an incident, categorized by the alarm level of the incident. Duration of the incident scales exponentially, with Level 4 
+incidents topping out at 3324.0 minutes (approx. 2 days), to Level 0 incidents taking only 20 minutes on average</p>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
 <script type="text/javascript">
 {% autoescape off %}
